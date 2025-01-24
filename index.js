@@ -88,7 +88,7 @@ app.post('/register', (req, res) => {
 //////////////////////////////////////////////////////////////////////////
 
 function readFile() {
-    const file = reader.readFile('./DMLB/player_database.xlsx')
+    const file = reader.readFile(__dirname + '/player_database.xlsx')
     
     for(let i = 0; i < 1; i++)
     {
