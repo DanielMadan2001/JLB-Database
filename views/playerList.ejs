@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players - JLB Databse</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="/playerList.css" />
+    <link rel="icon" href="/imgs/icon.png">
+</head>
+<body>
+    <div class="header"> 
+        <a href = "/"> <img src="/imgs/headerLogo.png"> </a>
+        <div class="headerButton"> <a href = "/search"> Search Player </a> </div>
+        <div class="headerButton"> All Players </div>
+        <div class="headerButton"> <a href = "/register"> Register player </a> </div>
+    </div>
+    <div class="headerSpace"> </div>
+    <br>
+    <div class="main"> </div>
+    <br><br>
+    <script>
+        const players = <%- JSON.stringify(playerList) %>;
+        const searchType = <%- JSON.stringify(searchType) %>;
+        const searchTerm = <%- JSON.stringify(searchTerm) %>;
+
+        const topText = function () {
+            const text = document.createElement("article");
+
+            if (searchType == 1) {
+                if (searchTerm[0] == " ") {
+                    text.innerHTML = `<h1> Results for "${searchTerm.substring(1)}": </h1>`;
+                }
+                else if (searchTerm.slice(-1) == " ") {
+                    text.innerHTML = `<h1> Results for "${searchTerm.slice(0, -1)}": </h1>`;
+                }
+                else{
+                    text.innerHTML = `<h1> Results for "${searchTerm}": </h1>`;
+                }
+            }
+            else {
+                text.innerHTML = `<h1> Results for "${searchTerm}": </h1>`;
+            }
+
+            return text;
+        }
+
+        const mainDiv = document.querySelector(".main");
+
+        if (searchType != 0) {
+            mainDiv.append(new topText());
+        }
+        
+        var playerCount = 0;
+        const playerTable = document.createElement("article");
+        const table = document.createElement("table");
+
+        const row = document.createElement("tr");
+        var section = document.createElement("th");
+        row.append(section);
+        section = document.createElement("th");     section.innerHTML = `<p> # </p>`;                   row.append(section);
+        section = document.createElement("th");     section.innerHTML = `<p> Team </p>`;                row.append(section);
+        section = document.createElement("th");     section.innerHTML = `<p> Favorite position </p>`;   row.append(section);
+        table.append(row);
+
+        players.forEach((player) => {
+            const row = document.createElement("tr");
+            const className = "tr" + (playerCount % 2);
+            row.classList.add(className);
+
+            // PLAYER NAME
+            section = document.createElement("th");
+            section.innerHTML = `<a href = "/player/${player.id}"> <p> ${player.givenName} ${player.surname} </p> </a>`;
+            row.append(section);
+            // PLAYER NUMBER
+            section = document.createElement("th");
+            section.innerHTML = `<a href = "/player/${player.id}"> <p> ${player.number} </p> </a>`;
+            row.append(section);
+            // TEAM
+            section = document.createElement("th");
+            section.innerHTML = `<a href = "/player/${player.id}"> <p> ${player.team} </p> </a>`;
+            row.append(section);
+            // POSITION
+            section = document.createElement("th");
+            section.innerHTML = `<a href = "/player/${player.id}"> <p> ${player.position} </p> </a>`;
+            row.append(section);
+
+            table.append(row);
+            playerCount++;
+        });
+        playerTable.append(table);
+        mainDiv.append(playerTable);
+    </script>
+</body>
+</html>

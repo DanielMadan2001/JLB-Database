@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - JLB Databse</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="/search.css" />
+    <link rel="icon" href="/imgs/icon.png">
+</head>
+<body>
+    <div class="header"> 
+        <a href = "/"> <img src="imgs/headerLogo.png"> </a>
+        <div class="headerButton"> Search Player </div>
+        <div class="headerButton"> <a href = "/players"> All Players </a> </div>
+        <div class="headerButton"> <a href = "/register"> Register player </a> </div>
+    </div>
+    <div class="headerSpace"> </div>
+    <div class="main">
+        <!-- NAME SEARCH -->
+        <div class="mainSection"> 
+            <h1> Name Search: </h1>
+            <h2> Search for a specific player using either their given name, surname or both! </h2>
+            <div> 
+                <input id="nameSearchTerm_given" type="text" placeholder="Given name">
+                <input id="nameSearchTerm_sur" type="text" placeholder="Surname" >
+            </div>
+            <div class="centerDiv">
+                <div id="nameSearchButton"> <button> Search for name </button> </div>
+            </div>
+        </div>
+        <!-- TEAM SEARCH -->
+        <div class="mainSection"> 
+            <h1> Team Search: </h1>
+            <h2> Search for all player that are members of the selected team! </h2>
+            <div class="centerDiv">
+                <select id="teamSearchTerm">
+                    <option value=""></option>
+                    <option value="Red%20Hawks">Red Hawks</option>
+                    <option value="Orange%20Orioles">Orange Orioles</option>
+                    <option value="Yellow%20Sparrows">Yellow Sparrows</option>
+                    <option value="Green%20Eagles">Green Eagles</option>
+                    <option value="Blue%20Pelicans">Blue Pelicans</option>
+                    <option value="Purple%20Robins">Purple Robins</option>
+                    <option value="Black%20Owls">Black Owls</option>
+                    <option value="White%20Nightingales">White Nightingales</option>
+                </select>
+            </div>
+            <div class="centerDiv">
+                <div id="teamSearchButton"> <button> Search for team </button> </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("nameSearchButton").onclick = function() {buttonClicked(0)};
+        document.getElementById("teamSearchButton").onclick = function() {buttonClicked(1)};
+
+        function buttonClicked(buttonIndex) {
+            if (buttonIndex == 0) {
+                if (document.getElementById('nameSearchTerm_given').value == "" && document.getElementById('nameSearchTerm_sur').value == "") {
+                    window.location.href = '/players';
+                    return;
+                }
+                window.location.href = '/players/name/' + document.getElementById('nameSearchTerm_given').value + "%20" + document.getElementById('nameSearchTerm_sur').value;
+            }
+            else if (buttonIndex == 1) {
+                if (document.getElementById('teamSearchTerm').value == "") {
+                    window.location.href = '/players';
+                    return;
+                }
+                window.location.href = '/players/team/' + document.getElementById('teamSearchTerm').value;
+            }
+            console.log(buttonIndex)
+        }
+    </script>
+</body>
+</html>

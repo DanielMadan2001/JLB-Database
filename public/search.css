@@ -1,0 +1,56 @@
+.mainSection {
+    width: 40%; 
+    margin: auto; 
+    float: left; 
+    margin-left: 75px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 56px;
+    color: white;
+    text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 2px 1px #000, -2px -1px #000, 2px -1px #000, -2px 1px #000;
+    margin-bottom: 10px;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 0px;
+}
+
+input{
+    margin: auto;
+    width: 47.5%;
+    height: 30px;
+    font-size: 18px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+select {
+    width: 47.5%;
+    height: 30px;
+    font-size: 18px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 25px;
+}
+
+.centerDiv {
+    display: flex; 
+    justify-content: center;
+}
+
+button {
+    margin-top: 30px;
+    font-size: 24px;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px;
+}
+
+button:hover {
+    background-color: whitesmoke;
+    opacity: 100%;
+}

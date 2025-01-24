@@ -1,0 +1,11 @@
+h1 {
+    font-size: 56px; 
+    color: white;
+    text-align: center;
+    text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
+}
+
+p {
+    font-size: 24px;
+    line-height: 1.25em;
+}

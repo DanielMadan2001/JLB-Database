@@ -1,0 +1,61 @@
+body {
+    margin:0;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+    position: fixed;
+    left: 0%;
+    right: 0%;
+    height: 100px;
+	background-image: url("imgs/banner.png");
+    background-position: center;
+    border-bottom: 10px groove teal;
+}
+
+.header img {
+    height: 100%;
+    padding-left: 15px;
+    padding-right: 25px;
+	margin: auto;
+    float: left;
+    margin-right: 15px;
+}
+
+.headerButton {
+	margin: auto;
+    float: left;
+    height: 30%;
+    margin-top: 55px;
+    margin-right: 15px;
+    background-color: #000;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    color: grey;
+    font-size: 1.5em;
+    text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
+    text-decoration: none;
+    padding-top: 6px;       padding-bottom: 5px;
+    padding-left: 7.5px;    padding-right: 7.5px; 
+}
+
+.header a {
+    color: white;
+    text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
+    text-decoration: none;
+}
+
+.header a:hover {
+    color: yellow;
+    opacity: 100%;
+}
+
+.headerSpace {
+    height: 110px;
+}
+
+.main {
+    padding-left: 1em;
+}

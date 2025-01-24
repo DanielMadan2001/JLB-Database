@@ -1,0 +1,33 @@
+h1 {
+    margin-left: 15px;
+}
+
+table {
+    width: 1250px;
+    margin: auto;
+    border: none;
+    border-radius: 25px;
+}
+
+td {
+    border-radius: 25px;
+    height: 40px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.tr0 {
+    background-color: #ccefff;
+}
+
+
+.tr1 {
+    background-color: #b3e7ff;
+}
+
+p {
+    text-decoration: none;
+}

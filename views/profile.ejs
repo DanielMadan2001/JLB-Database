@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= player.givenName %> <%= player.surname %> - JLB Databse</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="/profile.css" />
+    <link rel="icon" href="/imgs/icon.png">
+</head>
+<body>
+    <div class="header"> 
+        <a href = "/"> <img src="/imgs/headerLogo.png"> </a>
+        <div class="headerButton"> <a href = "/search"> Search Player </a> </div>
+        <div class="headerButton"> <a href = "/players"> All Players </a> </div>
+        <div class="headerButton"> <a href = "/register"> Register player </a> </div>
+    </div>
+    <div class="headerSpace"> </div>
+    <br>
+    <div class="cardParent">
+        <div style="background-size: contain; width: 100%; height: 100%; background-image: url(/imgs/playerCardBG.png)">
+            <h1 class="nameText"> <%= player.givenName %> <%= player.surname %> </h1>
+            <div class="leftSide"> 
+                <h1 class="playerNum"> <%= player.number %> </h1>
+                <h1 class="teamName"> <%= player.team %> </h1>
+                <br>
+                <div class="batsAndThrows">
+                    <h2 style="margin-left: 2.5%; width: 42.5%; "> Bats: <%= player.bats %> </h2>
+                    <h2 style="width: 50%; margin-bottom: 10px;"> Throws: <%= player.throws %> </h2>
+                </div>
+                <h2 style="margin-left: 2.5%; "> Favorite Position: <%= player.position %> </h2>
+                <h1 style="width: 150%; margin-top: 35px;"> <%= player.nickname %> </h1>
+            </div>
+            <div class="rightSide"> 
+                <img style="width: 95%; margin-top: 5%;" src="/imgs/cardActor.png">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

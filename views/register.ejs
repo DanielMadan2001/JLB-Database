@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - JLB Databse</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="/register.css" />
+    <link rel="icon" href="/imgs/icon.png">
+</head>
+<body>
+    <div class="header"> 
+        <a href = "/"> <img src="imgs/headerLogo.png"> </a>
+        <div class="headerButton"> <a href = "/search"> Search Player </a> </div>
+        <div class="headerButton"> <a href = "/players"> All Players </a> </div>
+        <div class="headerButton"> Register player </div>
+    </div>
+    <div class="headerSpace"> </div>
+    <div class="main">
+        <!-- NAMES -->
+        <div class="column"> 
+            <h1> Given name(s): </h1>
+            <i> <div class="warningText" id="warning_givenName"> </div> </i>
+            <input id="givenName" type="text">
+
+            <h1> Surname: </h1>
+            <i> <div class="warningText" id="warning_surname"> </div> </i>
+            <input id="surname" type="text">
+        </div>
+        <!-- TEAM/POSITION/NUMBER -->
+        <div class="column"> 
+            <h1> Team: </h1>
+            <i> <div class="warningText" id="warning_team"> </div> </i>
+            <select id="team">
+                <option value=""></option>
+                <option value="Red Hawks">Red Hawks</option>
+                <option value="Orange Orioles">Orange Orioles</option>
+                <option value="Yellow Sparrows">Yellow Sparrows</option>
+                <option value="Green Eagles">Green Eagles</option>
+                <option value="Blue Pelicans">Blue Pelicans</option>
+                <option value="Purple Robins">Purple Robins</option>
+                <option value="Black Owls">Black Owls</option>
+                <option value="White Nightingales">White Nightingales</option>
+            </select>
+
+            <h1> Favorite position: </h1>
+            <i> <div class="warningText" id="warning_position"> </div> </i>
+            <select id="position">
+                <option value=""></option>
+                <option value="P">Pitcher (P)</option>
+                <option value="1B">First Base (1B) </option>
+                <option value="2B">Second Base (2B)</option>
+                <option value="SS">Shortstop (SS)</option>
+                <option value="3B">Third Base (3B)</option>
+                <option value="Catcher">Catcher (C)</option>
+                <option value="LF">Left Field (LF)</option>
+                <option value="CF">Center Field (CF)</option>
+                <option value="RF">Right Field (RF)</option>
+            </select>
+
+            <h1> Number: </h1>
+            <i> <div class="warningText" id="warning_number"> </div> </i>
+            <input id="number" type="number">
+        </div>
+        <!-- BATS/THROWS/NICKNAMES -->
+        <div class="column"> 
+            <h1> Bats: </h1>
+            <div class="buttonsParent"> 
+                <button id="batsL"> Left </button>
+                <button id="batsB"> Both </button>
+                <button id="batsR"> Right </button>
+            </div>
+
+            <h1> Throws: </h1>
+            <div class="buttonsParent"> 
+                <button id="throwsL"> Left </button>
+                <button id="throwsB"> Both </button>
+                <button id="throwsR"> Right </button>
+            </div>
+
+            <h1> Nickname: </h1>
+            <input id="nickname" type="text">
+        </div>
+        <div class="centerDiv">
+            <div id="finishButton" style="margin-top: 50px;"> <button style="font-size: 36px; padding: 5px; padding-left: 10px; padding-right: 10px;"> Finish </button> </div>
+        </div>
+    </div>
+
+    <script>
+        const players = <%- JSON.stringify(players) %>;
+
+        const warning_givenName = document.getElementById("warning_givenName");
+        const warning_surname = document.getElementById("warning_surname");
+        const warning_team = document.getElementById("warning_team");
+        const warning_position = document.getElementById("warning_position");
+        const warning_number = document.getElementById("warning_number");
+        
+        let bats = 0;
+        const button_batsL = document.getElementById("batsL");  
+        const button_batsB = document.getElementById("batsB");  
+        const button_batsR = document.getElementById("batsR");  
+        let throws = 0;
+        const button_throwsL = document.getElementById("throwsL");  
+        const button_throwsB = document.getElementById("throwsB");  
+        const button_throwsR = document.getElementById("throwsR"); 
+
+        const finishButton = document.getElementById("finishButton");
+        finishButton.addEventListener('click', finish);
+        
+        const buttonUpdate = function(newBats = -1, newThrows = -1) {
+            if (newBats != -1) {
+                button_batsL.className = "";
+                button_batsB.className = "";
+                button_batsR.className = "";
+                bats = newBats;
+                if (bats == 0)      { button_batsL.className = "selectedButton"; }
+                else if (bats == 1) { button_batsB.className = "selectedButton"; }
+                else                { button_batsR.className = "selectedButton"; }
+            }
+            if (newThrows != -1) {
+                button_throwsL.className = "";
+                button_throwsB.className = "";
+                button_throwsR.className = "";
+                throws = newThrows;
+                if (throws == 0)      { button_throwsL.className = "selectedButton"; }
+                else if (throws == 1) { button_throwsB.className = "selectedButton"; }
+                else                { button_throwsR.className = "selectedButton"; }
+            }
+        }
+
+        const playerNumberCheck = function() {
+            var return_val = false;
+            players.forEach((player) => {
+                if (player.team == document.getElementById('team').value && player.number == document.getElementById('number').value) {
+                    console.log(player);
+                    return_val = true;
+                }
+            });
+            return return_val;
+        }
+
+        function finish() {
+            var noIssues = true;
+
+            if (document.getElementById('givenName').value == "") { 
+                noIssues = false;
+                warning_givenName.innerHTML = `<h4> <b>ERROR:</b> Player requires a valid given name </h4>`;
+            }
+            else {
+                warning_givenName.innerHTML = ``;
+            }
+
+            if (document.getElementById('surname').value == "") { 
+                noIssues = false;
+                warning_surname.innerHTML = `<h4> <b>ERROR:</b> Player requires a valid surname </h4>`;
+            }
+            else {
+                warning_surname.innerHTML = ``;
+            }
+
+            if (document.getElementById('team').value == "") { 
+                noIssues = false;
+                warning_team.innerHTML = `<h4> <b>ERROR:</b> Player must select a team </h4>`;
+            }
+            else {
+                warning_team.innerHTML = ``;
+            }
+
+            if (document.getElementById('position').value == "") { 
+                noIssues = false;
+                warning_position.innerHTML = `<h4> <b>ERROR:</b> Player must select a favorite position </h4>`;
+            }
+            else {
+                warning_position.innerHTML = ``;
+            }
+
+            if (document.getElementById('number').value < 1 || document.getElementById('number').value == "") { 
+                noIssues = false;
+                warning_number.innerHTML = `<h4> <b>ERROR:</b> Player requires a valid number </h4>`;
+            }
+            else if (playerNumberCheck()) { 
+                noIssues = false;
+                warning_number.innerHTML = `<h4> <b>ERROR:</b> Player on ${document.getElementById('team').value} is already using #${document.getElementById('number').value} </h4>`;
+            }
+            else{
+                warning_number.innerHTML = ``;
+            }
+            
+            if (noIssues) {
+
+                const newPlayer = {};
+
+                newPlayer.id = players.length + 1;
+                newPlayer.surname = document.getElementById('surname').value;
+                newPlayer.givenName = document.getElementById('givenName').value;
+                newPlayer.team = document.getElementById('team').value;
+                newPlayer.position = document.getElementById('position').value;
+                newPlayer.number = document.getElementById('number').value;
+                switch (bats) {
+                    case (0): newPlayer.bats = "Left"; break;
+                    case (1): newPlayer.bats = "Both"; break;
+                    case (2): newPlayer.bats = "Right"; break;
+                }
+                switch (throws) {
+                    case (0): newPlayer.throws = "Left"; break;
+                    case (1): newPlayer.throws = "Both"; break;
+                    case (2): newPlayer.throws = "Right"; break;
+                }
+                newPlayer.nickname = '"' + document.getElementById('nickname').value + '"';
+
+                fetch('/register',  {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(newPlayer)
+                })
+
+                window.open("/player/" + newPlayer.id);
+            }
+        };
+
+        buttonUpdate(0, 0); 
+        button_batsL.addEventListener('click', function() { buttonUpdate(0) });
+        button_batsB.addEventListener('click', function() { buttonUpdate(1) });
+        button_batsR.addEventListener('click', function() { buttonUpdate(2) });
+        button_throwsL.addEventListener('click', function() { buttonUpdate(-1, 0) });
+        button_throwsB.addEventListener('click', function() { buttonUpdate(-1, 1) });
+        button_throwsR.addEventListener('click', function() { buttonUpdate(-1, 2) });
+    </script>
+</body>
+</html>
